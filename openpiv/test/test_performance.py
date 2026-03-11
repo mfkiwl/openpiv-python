@@ -90,11 +90,14 @@ def test_replace_outliers_performance():
     u = np.random.randn(50, 50) * 10
     v = np.random.randn(50, 50) * 10
     flags = np.random.rand(50, 50) > 0.95  # 5% outliers
+
+    # Warm up the compiled/scipy-backed path before timing.
+    filters.replace_outliers(u, v, flags, method='localmean', max_iter=3)
     
     # Test with regular arrays
-    start = time.time()
+    start = time.perf_counter()
     uf, vf = filters.replace_outliers(u, v, flags, method='localmean', max_iter=3)
-    elapsed = time.time() - start
+    elapsed = time.perf_counter() - start
     
     assert uf.shape == u.shape
     assert vf.shape == v.shape

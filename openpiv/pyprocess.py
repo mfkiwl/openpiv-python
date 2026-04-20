@@ -768,8 +768,8 @@ def normalize_intensity(window):
         the interrogation window array, with zero mean and variance 1
     """
     # Convert to float32 only if needed, otherwise work in-place
-    if window.dtype != np.float32:
-        window = window.astype(np.float32)
+    if window.dtype != np.float64:
+        window = window.astype(np.float64)
     else:
         window = window.copy()  # Still need a copy to avoid modifying input
     

@@ -755,7 +755,10 @@ def fft_correlate_images(
 def normalize_intensity(window):
     """Normalize interrogation window or strided image of many windows,
        by removing the mean intensity value per window and dividing by 
-       the standard deviation
+       the standard deviation. Note: for small signals the standdeviation
+       might not be full converged. Also numpy docs recommend float64 for
+       better accuracy: 
+       https://numpy.org/doc/stable/reference/generated/numpy.std.html
 
     Parameters
     ----------
@@ -767,7 +770,7 @@ def normalize_intensity(window):
     window :  2d np.ndarray
         the interrogation window array, with zero mean and variance 1
     """
-    # Convert to float32 only if needed, otherwise work in-place
+    # Convert to float64 only if needed, otherwise work in-place
     if window.dtype != np.float64:
         window = window.astype(np.float64)
     else:

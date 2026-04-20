@@ -774,7 +774,7 @@ def normalize_intensity(window):
         window = window.copy()  # Still need a copy to avoid modifying input
     
     window -= window.mean(axis=(-2, -1),
-                          keepdims=True, dtype=np.float32)
+                          keepdims=True, dtype=np.float64)
     tmp = window.std(axis=(-2, -1), keepdims=True)
     window = np.divide(window, tmp, out=np.zeros_like(window),
                        where=(tmp != 0))

@@ -754,8 +754,8 @@ def fft_correlate_images(
 
 def normalize_intensity(window):
     """Normalize interrogation window or strided image of many windows,
-       by removing the mean intensity value per window and clipping the
-       negative values to zero
+       by removing the mean intensity value per window and dividing by 
+       the standard deviation
 
     Parameters
     ----------
@@ -765,9 +765,7 @@ def normalize_intensity(window):
     Returns
     -------
     window :  2d np.ndarray
-        the interrogation window array, with mean value equal to zero and
-        intensity normalized to -1 +1 and clipped if some pixels are
-        extra low/high
+        the interrogation window array, with zero mean and variance 1
     """
     # Convert to float32 only if needed, otherwise work in-place
     if window.dtype != np.float32:

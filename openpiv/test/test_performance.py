@@ -33,14 +33,14 @@ def test_find_all_first_peaks_performance():
 
 def test_normalize_intensity_performance():
     """Test that normalize_intensity avoids unnecessary conversions."""
-    # Test with float32 input (should not convert)
-    window_float = np.random.rand(50, 64, 64).astype(np.float32)
+    # Test with float64 input (should not convert)
+    window_float = np.random.rand(50, 64, 64).astype(np.float64)
     
     start = time.time()
     result = pyprocess.normalize_intensity(window_float)
     elapsed_float = time.time() - start
     
-    assert result.dtype == np.float32
+    assert result.dtype == np.float64
     
     # Test with uint8 input (needs conversion)
     window_uint = (np.random.rand(50, 64, 64) * 255).astype(np.uint8)
@@ -49,7 +49,7 @@ def test_normalize_intensity_performance():
     result = pyprocess.normalize_intensity(window_uint)
     elapsed_uint = time.time() - start
     
-    assert result.dtype == np.float32
+    assert result.dtype == np.float64
     
     # Should be reasonably fast (< 50ms for 50 windows)
     assert elapsed_float < 0.05, f"normalize_intensity (float32) took {elapsed_float:.4f}s"

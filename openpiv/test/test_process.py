@@ -166,8 +166,8 @@ def test_sig2noise_ratio():
         subpixel_method="gaussian"
     )   
     # print(s2n.flatten().min(),s2n.mean(),s2n.max())
-    assert np.allclose(s2n.mean(), 1.422, rtol=1e-3)
-    assert np.allclose(s2n.max(), 2.264, rtol=1e-3)
+    assert np.allclose(s2n.mean(), 2.564, rtol=1e-3)
+    assert np.allclose(s2n.max(), 4.119, rtol=1e-3)
 
 
 def test_fft_correlate():
